@@ -300,7 +300,7 @@ export default {
           this.userProfile = response.data
         }).catch(error => {
           this.TOGGLE_LOADING_STATUS()
-          this.$message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+          this.$message({message: '旅行者，MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
           Promise.reject(error)
         })
       }
@@ -341,7 +341,7 @@ export default {
     },
     // 上传图片失败时的钩子
     handleAvatarError(err, f) {
-      this.$message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+      this.$message({message: '旅行者，MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
       Promise.reject(err)
     },
     // 上传图片成功时的钩子

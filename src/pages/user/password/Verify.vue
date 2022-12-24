@@ -3,6 +3,12 @@
     <div class="main">
       <h1 class="title">重置你的密纹</h1>
       <el-form class="form c-form" ref="form" :rules="rules" :model="form">
+        <el-form-item label="验证码">
+          <el-input
+            placeholder="验证码"
+            v-model="code"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="新密码" prop="password">
           <el-input
             placeholder="新密码至少6位"
@@ -34,12 +40,15 @@
 import { mapMutations, mapActions } from 'vuex'
 import api from '@/api'
 import c from '@/common/js'
+import {SPONSORED_URL} from "../../../store/mutation-types"
 export default {
   name: 'passwordVerify',
   data() {
     return {
+      recoverUrl: SPONSORED_URL+'/recover',
       isLoaded: false,
       isLoading: false,
+      code: '',
       form: {
         password: '',
         password_confirmation: ''
@@ -84,20 +93,28 @@ export default {
     submitForm() {
       this.$refs.form.validate(valid => {
         if (valid) {
+          let uname=this.$route.params.name
           this.isLoading = true
-          const path = this.$router.currentRoute.path
-          api.post(path, this.form).then(response => {
+          this.axios({
+            url: this.recoverUrl,
+            method: 'post',
+            params: {
+              newpassword: this.form.password,
+              name: uname,
+              code: this.code,
+            }
+          }).then(response => {
             this.isLoading = false
-            if (response.data.verified) {
+           // if (response.data.verified) {
               this.isLoaded = true
               // 用户登录
-              this.successLogin(response.data.access_token)
+              this.successLogin(response.data.access_token,uname)
               this.$message({
                 message: '旅行者，密码重置成功。',
                 type: 'success',
                 customClass: 'c-msg'
               })
-            } else {
+           /* } else {
               this.$message({
                 message: '旅行者，confirmation_token失效或不存在，请重新发送密码重置邮件。',
                 type: 'error',
@@ -105,11 +122,11 @@ export default {
                 duration: 0,
                 showClose: true
               })
-            }
+            }*/
           }).catch(error => {
             this.isLoading = false
             this.$message({
-              message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
+              message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
               type: 'error',
               customClass: 'c-msg',
               duration: 0,
@@ -122,14 +139,15 @@ export default {
       })
     },
     // 成功登录后的操作
-    successLogin(token) {
+    successLogin(token,id) {
       // 存储 ACCESS_TOKEN 进 localstorage
-      window.localStorage.setItem('ACCESS_TOKEN', token)
+     // window.localStorage.setItem('ACCESS_TOKEN', token)
       // 更改登录状态
-      this.CHECKOUT_LOGIN_STATUS()
+      //this.CHECKOUT_LOGIN_STATUS()
       // 加载个人信息
-      this.loadProfile()
+      //this.loadProfile()
       // 跳转到首页
+      window.localStorage.setItem('ID', id)
       this.$router.replace('/')
     },
     ...mapMutations([

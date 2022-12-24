@@ -103,7 +103,7 @@ export default {
     return {
       intro: {
         title: '消息通知与私信',
-        content: '旅行者，消息通知与私信记录了你在诗词小筑的一点一滴。从激活密纹之力，收藏诗文，到关注别人与被他人关注，它似回马灯般闪烁于你我之心。诗词小筑，休憩之所，愿能与君共飨片刻温存。',
+        content: '旅行者，消息通知与私信记录了你在MeetingNature的一点一滴。',
         icon: 'fa fa-bell'
       },
       dialogVisible: false

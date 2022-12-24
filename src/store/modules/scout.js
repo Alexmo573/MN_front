@@ -19,7 +19,7 @@ const actions = {
       commit(types.SCOUT_CONTENTLIST, response.data)
     }).catch(error => {
       commit(types.TOGGLE_LOADING_STATUS)
-      Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+      Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
       Promise.reject(error)
     })
   }

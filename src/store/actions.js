@@ -19,7 +19,7 @@ export default {
     }).catch(error => {
       commit(types.TOGGLE_LOADING_STATUS)
       Message({
-        message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
+        message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
         type: 'error',
         customClass: 'c-msg',
         duration: 0,

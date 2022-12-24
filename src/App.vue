@@ -5,7 +5,7 @@
       <transition name="router-fade">
         <router-view></router-view>
       </transition>
-      <back-to-top></back-to-top>
+      <!--back-to-top></back-to-top-->
     </div>
     <!--app-footer></app-footer-->
   </div>

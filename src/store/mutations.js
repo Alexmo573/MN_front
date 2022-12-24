@@ -30,5 +30,6 @@ export default {
   [types.USER_LOGOUT](state) {
     // 清除用户的 ACCESS_TOKEN
     window.localStorage.removeItem('ACCESS_TOKEN')
+    window.localStorage.removeItem('ID')
   }
 }

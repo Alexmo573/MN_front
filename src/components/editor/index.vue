@@ -48,7 +48,8 @@ import {quillEditor} from "vue-quill-editor";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
-
+import ImageResize from 'quill-image-resize-module' // 引用，调整图片大小
+Quill.register('modules/imageResize', ImageResize)
 export default {
   props: {
     /* 编辑器的内容 */
@@ -90,7 +91,15 @@ export default {
                 }
               }
             }
-          }
+          },
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white'
+            },
+            modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+          },
         }
       },
       uploadImgUrl: this.pictureUrl, // 上传的图片服务器地址
@@ -155,7 +164,7 @@ export default {
 <style>
 .editor {
   line-height: normal !important;
-  height: 600px;
+  height: 880px;
 }
 
 .quill-img {

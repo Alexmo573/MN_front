@@ -1,6 +1,6 @@
 <template lang="html">
   <footer class="df-footer">
-    <span>&copy; 诗词小筑 {{ date }}. All Rights Reserved.</span>
+    <span>&copy; MeetingNature {{ date }}. All Rights Reserved.</span>
  		<div class="beian">
       <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33030202000623">
         <span>浙公网安备 33030202000623号</span>

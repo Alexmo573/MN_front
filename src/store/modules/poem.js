@@ -43,7 +43,7 @@ const actions = {
       commit(types.STORE_POEM_CURRENTPAGE, response.data.current_page)
     }).catch(error => {
       commit(types.TOGGLE_LOADING_STATUS, quit)
-      Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+      Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
       Promise.reject(error)
     })
   },
@@ -71,7 +71,7 @@ const actions = {
       commit(types.STORE_POEM_COMMENT, response.data.comments)
     }).catch(error => {
       commit(types.TOGGLE_LOADING_STATUS)
-      Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+      Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
       Promise.reject(error)
     })
     // 加载用户关注状态
@@ -106,7 +106,7 @@ const actions = {
       await api.post('poem/vote', {'poem': poem}).then(response => {
         commit(types.TOGGLE_POEM_VOTED, response.data.voted)
       }).catch(error => {
-        Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+        Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
         Promise.reject(error)
       })
     }
@@ -117,7 +117,7 @@ const actions = {
       await api.post('poem/favorite', {'poem': poem}).then(response => {
         commit(types.TOGGLE_POEM_FAVORED, response.data.favored)
       }).catch(error => {
-        Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+        Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
         Promise.reject(error)
       })
     }
@@ -128,7 +128,7 @@ const actions = {
       await api.post('user/follow', {'user': user}).then(response => {
         commit(types.TOGGLE_POEM_AUTHOR_FOLLOWED, response.data.followed)
       }).catch(error => {
-        Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+        Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
         Promise.reject(error)
       })
     }
@@ -140,7 +140,7 @@ const actions = {
         commit(types.STORE_POEM_COMMENT, response.data)
         Message({message: '评论成功。', type: 'success', customClass: 'c-msg'})
       }).catch(error => {
-        Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+        Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
         Promise.reject(error)
       })
     }
@@ -152,7 +152,7 @@ const actions = {
         commit(types.STORE_POEM_RATING, response.data.rated)
         Message({message: '评分成功。', type: 'success', customClass: 'c-msg'})
       }).catch(error => {
-        Message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+        Message({message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
         Promise.reject(error)
       })
     }

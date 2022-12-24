@@ -72,7 +72,7 @@ export default {
       submitUrl: SPONSORED_URL+'/Project',
       project:{
         projectName	: '',
-        organization: '',
+        organization: 'green',
         describe: '',
         monthFee: '',
       },
@@ -84,7 +84,7 @@ export default {
     }
   },
   create(){
-
+    this.project.organization=window.localStorage.getItem('ID')
   },
   methods: {
     handleRemove(file, fileList) {
@@ -110,7 +110,6 @@ export default {
           type: 'error',
         })
       }else{
-
         this.project.organization="green"
         this.axios({
           method: 'post',

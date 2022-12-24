@@ -65,7 +65,7 @@
             <el-form-item prop="protocol">
               <el-checkbox v-model="form.protocol">
                 阅读并同意
-                <el-button type="text" @click="showDialog">诗词小筑用户注册和版权声明</el-button>
+                <el-button type="text" @click="showDialog">MeetingNature用户注册和版权声明</el-button>
               </el-checkbox>
             </el-form-item>
             <el-form-item>
@@ -79,8 +79,8 @@
             </el-form-item>
           </el-form>
         </div>
-        <el-dialog class="register-dialog c-dialog" title="诗词小筑用户相关和版权声明" v-model="dialogVisible">
-          <span>用户同意所有以下条款后才能成为诗词小筑(以下简称本站)的正式注册用户。</span>
+        <el-dialog class="register-dialog c-dialog" title="MeetingNature用户相关和版权声明" v-model="dialogVisible">
+          <span>用户同意所有以下条款后才能成为MeetingNature(以下简称本站)的正式注册用户。</span>
           <div class="about-user">
             <h3>本站用户相关</h3>
             <span>1. 用户在本站发布相关原创诗文(文章)须为用户个人创作所得。</span>
@@ -271,7 +271,7 @@ export default {
             this.alertVisible = true
           }).catch(error => {
             this.isLoading = false
-            this.$message({message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
+            this.$message({message: '旅行者，MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~', type: 'error', customClass: 'c-msg', duration: 0, showClose: true})
             Promise.reject(error)
           })
         }

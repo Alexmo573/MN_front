@@ -2,17 +2,17 @@
   <div class="df-password">
     <el-alert
       class="alert"
-      title="旅行者，密码重置邮件成功。请前往注册邮箱查收，些许邮箱在垃圾邮件才能找到，:)"
+      title="朋友，密码重置邮件成功。请前往注册邮箱查收，些许邮箱在垃圾邮件才能找到，:)"
       type="success"
       v-show="alertVisible"
     ></el-alert>
     <div class="main">
-      <h1 class="title">旅行者，寻回你的密纹</h1>
-      <el-form class="form c-form" ref="form" :rules="rules" :model="form">
-        <el-form-item label="邮箱" prop="email">
+      <h1 class="title">朋友，寻回你的密纹</h1>
+      <el-form class="form c-form" ref="form" :model="form">
+        <el-form-item label="用户名" prop="email">
           <el-input
-            placeholder="请输入你的注册邮箱"
-            v-model="form.email"
+            placeholder="请输入你的用户名"
+            v-model="name"
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -31,13 +31,16 @@
 <script>
 import api from '@/api'
 import c from '@/common/js'
+import {SPONSORED_URL} from "../../../store/mutation-types"
 export default {
   name: 'passwordForget',
   data() {
     return {
+      emailUrl: SPONSORED_URL+'/recoverEmail',
       alertVisible: false,
       isLoading: false,
       isLoaded: false,
+      name: '',
       form: {
         email: ''
       },
@@ -82,16 +85,24 @@ export default {
         if (valid) {
           this.form.is_submit = true
           this.isLoading = true
-          api.post('user/password/forget', this.form).then(response => {
+          this.axios({
+            method: 'post',
+            url: this.emailUrl,
+            params: {
+              name: this.name
+            },
+          }).then(response => {
             this.isLoading = false
             if (response.data.forget) {
               this.isLoaded = true
               this.alertVisible = true
             }
+            this.$router.push({name:'passwordVerify',params:{name:this.name}})
+            //this.$router.replace('/user/password/reset')
           }).catch(error => {
             this.isLoading = false
             this.$message({
-              message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
+              message: 'MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
               type: 'error',
               customClass: 'c-msg',
               duration: 0,

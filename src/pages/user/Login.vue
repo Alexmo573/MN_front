@@ -5,7 +5,7 @@
         <el-form-item prop="name" label="神念">
           <el-input
             v-model="form.name"
-            placeholder="用户名/已验证邮箱"
+            placeholder="用户名"
           ><i class="fa fa-user" slot="prepend"></i></el-input>
         </el-form-item>
         <el-form-item prop="password" label="密纹">
@@ -17,9 +17,9 @@
         </el-form-item>
         <el-form-item prop="isRemember">
           <div class="remember">
-            <el-checkbox
+            <!--el-checkbox
               v-model="form.isRemember"
-            >自动登录</el-checkbox>
+            >自动登录</el-checkbox-->
             <el-button type="text" @click="forget">忘记密码❤️</el-button>
           </div>
         </el-form-item>
@@ -27,7 +27,7 @@
           <el-button class="publish" @click="submitForm">登录</el-button>
         </el-form-item>
       </el-form>
-      <div class="text-line-35">第三方登录</div>
+      <!--div class="text-line-35">第三方登录</div>
       <div class="oauth">
         <div class="oauth-box">
           <el-button :loading="isLoading" @click="weibo">
@@ -39,19 +39,23 @@
             <i class="fa fa-github"></i>
           </el-button>
         </div>
-      </div>
+      </div-->
     </div>
   </div>
 </template>
 
 <script>
 import api from '@/api'
+import axios from 'axios'
+import qs from 'qs'
 import c from '@/common/js'
 import { mapMutations, mapActions } from 'vuex'
+import {SPONSORED_URL} from "../../store/mutation-types";
 export default {
   name: 'userLogin',
   data() {
     return {
+      logUrl: SPONSORED_URL+'/login',
       form: {
         name: '',
         password: '',
@@ -61,7 +65,7 @@ export default {
         name: [
           {
             required: true,
-            message: '旅行者，报上名来，;-)',
+            message: '朋友，报上名来，;-)',
             trigger: 'blur'
           }
         ],
@@ -98,19 +102,30 @@ export default {
       this.$refs['form'].validate(valid => {
         if (valid) { // 验证成功后，提交表单
           this.TOGGLE_LOADING_STATUS()
-          let data = {
+/*          let data = {
+            'name': this.form.name,
             'password': this.form.password,
-            'isRemember': this.form.isRemember
-          }
-          // 判断用户是用 name 或 email 登录的
+            //'isRemember': this.form.isRemember
+          }*/
+/*          // 判断用户是用 name 或 email 登录的
           if (/^[\u4E00-\u9FFFa-zA-Z0-9_-]{4,20}$/.test(this.form.name)) {
             data.name = this.form.name
             data.email = ''
           } else {
             data.email = this.form.name
             data.name = ''
+          }*/
+
+          this.axios({
+              method: 'get',
+              url: this.logUrl,
+              params:{
+                 name: this.form.name,
+                 password: this.form.password,
+              },
           }
-          api.post('user/login', data).then(response => {
+          ).then(response => {
+            console.log(response.data)
             this.TOGGLE_LOADING_STATUS()
             if (response.data.error) {
               return this.$message({
@@ -126,11 +141,11 @@ export default {
               type: 'success',
               customClass: 'c-msg'
             })
-            this.successLogin(response.data.access_token)
+            this.successLogin(response.data.access_token,this.form.name)
           }).catch(error => {
-            this.TOGGLE_LOADING_STATUS()
+            //this.TOGGLE_LOADING_STATUS()
             this.$message({
-              message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
+              message: '朋友，MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
               type: 'error',
               customClass: 'c-msg',
               duration: 0,
@@ -143,13 +158,14 @@ export default {
       })
     },
     // 成功登录后的操作
-    successLogin(token) {
+    successLogin(token,id) {
       // 存储 ACCESS_TOKEN 进 localstorage
-      window.localStorage.setItem('ACCESS_TOKEN', token)
+      //window.localStorage.setItem('ACCESS_TOKEN', token)
+      window.localStorage.setItem('ID', id)
       // 更改登录状态
-      this.CHECKOUT_LOGIN_STATUS()
+      //this.CHECKOUT_LOGIN_STATUS()
       // 加载个人信息
-      this.loadProfile()
+      //this.loadProfile()
       // 跳转到首页
       this.$router.replace('/')
     },

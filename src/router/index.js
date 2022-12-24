@@ -59,7 +59,10 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
     }, {
       path: '/user/login',
       name: 'userLogin',
@@ -87,7 +90,7 @@ const router = new Router({
       name: 'passwordForget',
       component: PasswordForget
     }, {
-      path: '/user/password/reset/:token',
+      path: '/user/password/reset',
       name: 'passwordVerify',
       component: PasswordVerify
     }, {
@@ -113,11 +116,17 @@ const router = new Router({
     }, {
       path: '/feedback',
       name: 'feedback',
-      component: Feedback
+      component: Feedback,
+      meta: {
+        requiresAuth: true
+      }
     }, {
       path: '/appreciation',
       name: 'apprec',
-      component: Apprec
+      component: Apprec,
+      meta: {
+        requiresAuth: true
+      }
     }, {
       path: '/appreciation/:appreciation_id(\\d+)',
       name: 'apprecView',
@@ -158,7 +167,10 @@ const router = new Router({
     }, {
       path: '/creatProject',
       name: 'creatProject',
-      component: CreatProject
+      component: CreatProject,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
@@ -168,7 +180,7 @@ router.beforeEach((to, from, next) => {
   // 检查登录状态
   store.commit(types.CHECKOUT_LOGIN_STATUS)
   if (to.matched.some(record => record.meta.requiresAuth)) { // 判断该路由是否需要登录权限
-    if (window.localStorage.ACCESS_TOKEN) { // 如果本地存在 access_token，则继续导航
+    if (window.localStorage.ID) { // 如果本地存在 access_token，则继续导航
       next()
     } else {
       next({

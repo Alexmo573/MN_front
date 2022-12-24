@@ -14,8 +14,7 @@
       <span
         class="last-page"
         v-if="isLastPage"
-      >旅行者，你已至诗词小筑的终焉。:)</span>
-    </div>
+      >MeetingNature的终焉。:)</span>
     </div>
   </div>
 </template>
@@ -78,7 +77,7 @@ export default {
       } else if (this.apprecCurrentPage === this.apprecLastPage && !this.isLastPage) {
         // 若分页达最后一页，则抛出提醒信息
         this.$message({
-          message: '旅行者，你已至诗词小筑的终焉。:)',
+          message: 'MeetingNature终焉。:)',
           type: 'warning',
           customClass: 'c-msg'
         })

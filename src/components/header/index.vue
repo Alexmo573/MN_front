@@ -33,8 +33,9 @@
           </el-submenu>
         </template>
         <template v-else>
-          <el-menu-item index="6" :route="{ name:'userLogin' }">登录</el-menu-item>
-          <el-menu-item index="7" :route="{ name:'userRegister' }">注册</el-menu-item>
+          <!--el-menu-item index="6" :route="{ name:'userLogin' }">登录</el-menu-item>
+          <el-menu-item index="7" :route="{ name:'userRegister' }">注册</el-menu-item-->
+          <el-menu-item index="8" :route="{ name:'userLogin' }" @click="logout">退出</el-menu-item>
         </template>
       </el-col-->
     </el-row>
@@ -78,6 +79,10 @@ export default {
     }
   },
   methods: {
+    logout(){
+      window.localStorage.removeItem("ID")
+      this.$router.replace('/user/login')
+    },
     // 检索用户输入的关键字
     scout() {
       this.$router.push('/scout?query=' + this.$refs['searchbar'].$data.currentValue + '&s=' + Math.random())

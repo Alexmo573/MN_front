@@ -4,14 +4,14 @@
       <el-alert
         title="激活账号成功"
         type="success"
-        description="旅行者，恭喜你注册成功。之后的日子里，诗词小筑会一直陪着你。直至终焉， :)"
+        description="恭喜你注册成功。之后的日子里，MeetingNature会一直陪着你。直至终焉， :)"
         v-if="isSuccess"
         v-show="isShow"
       ></el-alert>
       <el-alert
         title="激活账号失败"
         type="error"
-        description="旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~"
+        description="MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~"
         v-show="isShow"
         v-else
       ></el-alert>

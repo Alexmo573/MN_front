@@ -4,8 +4,8 @@
       <div v-for="(item,index) in feedbackList">
         <div class="feedback">
           <el-button class="feedbackDel" size="mini" icon="delete" @click="removeFeedback(item)"></el-button>
-          <div v-html="item.content" :key="index"></div>
-          <div>{{item.projectName}}&nbsp;{{item.status}}&nbsp;{{item.createTime}}</div>
+          <div class="feedbackContent" v-html="item.content" :key="index"></div>
+          <div id="feedbackFoot">{{item.projectName}}&nbsp;{{item.createTime}}</div>
         </div>
       </div>
       <el-button
@@ -13,6 +13,14 @@
         v-show="spinnerVisible"
         :loading="isLoading"
       >Loading...</el-button>
+      <el-pagination
+        small
+        layout="prev, pager, next"
+        @current-change="change"
+        :pager-count="7"
+        :page-size="3"
+        :total="total">
+      </el-pagination>
     </div>
     <el-dialog
       title="提示"
@@ -28,7 +36,6 @@
 </template>
 
 <script>
-import SubPoem from '@/components/subPoem'
 import {SPONSORED_URL} from "../../store/mutation-types"
 import {
   mapGetters,
@@ -37,15 +44,13 @@ import {
 import axios from "_axios@0.16.2@axios";
 export default {
   name: 'feedback',
-  components: {
-    SubPoem
-  },
   data() {
     return {
       organization: 'green',
       getFeedbackUrl: SPONSORED_URL+'/FeedBack/AllByOrg',
       delFeedbackUrl: SPONSORED_URL+'/FeedBack/Id',
       feedbackList: [],
+      total: 0,
       feedbackResult:{
         feedback:[]
       },
@@ -69,17 +74,37 @@ export default {
     window.removeEventListener('scroll', this.next, false)
     next()
   },
-  async created() {
+  created() {
+    this.organization=window.localStorage.getItem('ID')
     this.getFeedback()
 
       // 重置分页参数
     this.resetPagination()
     // 加载诗文列表
-    await this.loadPoemList()
-    // 给 window 绑定 scroll 事件，实现无限加载
-    window.addEventListener('scroll', this.next, false)
   },
   methods: {
+    change(val){
+      this.axios({
+        method: 'get',
+        params: {
+          organization: this.organization,
+          index: val,
+          pageSize: '3',
+        },
+        url: this.getFeedbackUrl
+      }).then(response => {
+        this.feedbackList=response.data.List
+        this.total=response.data.Total
+        console.log('feedback')
+        console.log(response.data)
+      }).catch(error => {
+        this.$message({
+          message: 'error/(ㄒoㄒ)/~~获取反馈失败',
+          type: 'error',
+        })
+        Promise.reject(error)
+      })
+    },
     removeFeedback(item){
       this.checkDel=!this.checkDel
       this.thisFeedback=item
@@ -119,12 +144,13 @@ export default {
         method: 'get',
         params: {
           organization: this.organization,
-          index: '4',
-          pageSize: '6',
+          index: '1',
+          pageSize: '3',
         },
         url: this.getFeedbackUrl
       }).then(response => {
-        this.feedbackList=response.data
+        this.feedbackList=response.data.List
+        this.total=response.data.Total
         console.log('feedback')
         console.log(response.data)
       }).catch(error => {
@@ -198,4 +224,11 @@ export default {
         width 60%
       .feedbackDel
         float right
+      .feedbackContent
+        margin 20px
+        margin-top 30px
+      #feedbackFoot
+        font-size small
+        margin-left 25px
+        margin-bottom 20px
 </style>

@@ -56,12 +56,12 @@ export default {
     return {
       followersIntro: {
         title: '关注列表',
-        content: '旅行者，关注列表记录了你在诗词小筑的一点一滴。从激活密纹之力，收藏诗文，到关注别人与被他人关注，它似回马灯般闪烁于你我之心。诗词小筑，休憩之所，愿能与君共飨片刻温存。',
+        content: 'MeetingNature',
         icon: 'fa fa-heartbeat'
       },
       followingsIntro: {
         title: '粉丝列表',
-        content: '旅行者，粉丝列表记录了你在诗词小筑的一点一滴。从激活密纹之力，收藏诗文，到关注别人与被他人关注，它似回马灯般闪烁于你我之心。诗词小筑，休憩之所，愿能与君共飨片刻温存。',
+        content: 'MeetingNature',
         icon: 'fa fa-gavel'
       },
       isFollowerList: false,
@@ -101,7 +101,7 @@ export default {
       }).catch(error => {
         this.TOGGLE_LOADING_STATUS()
         this.$message({
-          message: '旅行者，诗词小筑出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
+          message: '旅行者，MeetingNature出了点状况，您可以稍后再来光顾，拜托啦/(ㄒoㄒ)/~~',
           type: 'error',
           customClass: 'c-msg',
           duration: 0,
